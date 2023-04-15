@@ -9,6 +9,14 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <div class="text-center">
+        <h3 class="text-secondary text-center mt-5 pt-5">
+          Welcome, to ravenous! Please make a search
+        </h3>
+        <i class="mdi mdi-loading mdi-spin fs-1 text-secondary"></i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,15 +33,15 @@ export default {
     const location = 'Boise'
     const sortBy = 'best_match'
 
-    async function getTestBusinesses() {
-      try {
-        await businessService.getTestBusinesses(term, location, sortBy)
-      } catch (error) {
-        Pop.error(error, '[get test businesses]')
-      }
-    }
+    // async function getTestBusinesses() {
+    //   try {
+    //     await businessService.getTestBusinesses(term, location, sortBy)
+    //   } catch (error) {
+    //     Pop.error(error, '[get test businesses]')
+    //   }
+    // }
     onMounted(() => {
-      getTestBusinesses()
+      // getTestBusinesses()
     })
     return {
       business: computed(() => AppState.businesses)

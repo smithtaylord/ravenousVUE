@@ -9,16 +9,17 @@
                         'px-5 active' : 'px-5'">Highest Rated</li>
                     <li @click="sort('review_count')" :class="sortBy == 'review_count' ?
                         'px-5 active' : 'px-5'">Most Reviewed</li>
-
                 </ul>
             </div>
-            <div class="SearchBar-fields">
-                <input placeholder="Search Businesses" />
-                <input placeholder="Where?" />
-            </div>
-            <div class="SearchBar-submit">
-                <button class="btn" onClick={this.handleSearch}>Let's Go</button>
-            </div>
+            <form @submit.prevent="search">
+                <div class="SearchBar-fields">
+                    <input v-model="editable.term" placeholder="Search Businesses" />
+                    <input v-model="editable.location" placeholder="Where?" />
+                </div>
+                <div class="SearchBar-submit">
+                    <button class="btn" type="submit">Let's Go</button>
+                </div>
+            </form>
         </div>
 
     </div>
@@ -27,14 +28,30 @@
 
 <script>
 import { ref } from 'vue';
+import Pop from '../utils/Pop.js';
+import { businessService } from '../services/BusinessService.js';
+import { logger } from '../utils/Logger.js';
 
 export default {
     setup() {
         const sortBy = ref('best_match')
+        const editable = ref({})
+
         return {
             sortBy,
+            editable,
             sort(category) {
                 sortBy.value = category
+            },
+            async search() {
+                try {
+                    let term = editable.value.term
+                    let location = editable.value.location
+                    // logger.log(`term ${term} location ${location} sortBy ${sortBy.value}`)
+                    await businessService.search(term, location, sortBy.value)
+                } catch (error) {
+                    Pop.error(error, '[get businesses]')
+                }
             }
         }
     }
