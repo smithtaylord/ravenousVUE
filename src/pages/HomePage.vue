@@ -1,9 +1,23 @@
-<template></template>
+<template>
+  <div class="app">
+    <h1 class="mb-0">ravenous</h1>
+    <SearchBar />
+    <div class="container" v-if="business.length > 0">
+      <div class="row">
+        <div v-for="b in business" class="col-6 col-lg-4 mt-3">
+          <BusinessCard :business="b" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <script>
 import Pop from '../utils/Pop.js';
 import { businessService } from '../services/BusinessService.js'
 import { onMounted } from 'vue';
+import { computed } from '@vue/reactivity';
+import { AppState } from '../AppState.js';
 
 export default {
   setup() {
@@ -22,30 +36,10 @@ export default {
       getTestBusinesses()
     })
     return {
-
+      business: computed(() => AppState.businesses)
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-
-  .home-card {
-    width: 50vw;
-
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>
