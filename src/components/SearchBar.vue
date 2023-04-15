@@ -2,8 +2,10 @@
     <div class="component">
         <div class="SearchBar">
             <div class="SearchBar-sort-options">
-                <ul>
-                    Sort Options Go Here
+                <ul class="d-flex justify-content-center">
+                    <li class="px-5">Best Match</li>
+                    <li class="px-5">Highest Rated</li>
+                    <li class="px-5">Most Reviewed</li>
                 </ul>
             </div>
             <div class="SearchBar-fields">
@@ -11,7 +13,7 @@
                 <input placeholder="Where?" />
             </div>
             <div class="SearchBar-submit">
-                <a onClick={this.handleSearch}>Let's Go</a>
+                <button class="btn" onClick={this.handleSearch}>Let's Go</button>
             </div>
         </div>
 
@@ -40,15 +42,15 @@ export default {
 }
 
 .SearchBar-sort-options ul {
-    display: flex;
-    justify-content: center;
+    // display: flex;
+    // justify-content: center;
     margin-bottom: 2.22rem;
     color: #ffffff;
 }
 
 .SearchBar-sort-options li {
     cursor: pointer;
-    width: 4.33rem;
+    // width: 4.33rem;
     border-bottom: 1px solid #fff;
     padding: 0 2.58rem .33rem 2.58rem;
     line-height: 1.13;
@@ -56,6 +58,7 @@ export default {
     font-weight: 600;
     font-size: .83rem;
     transition: color .25s;
+    list-style-type: none;
 }
 
 .SearchBar-sort-options li:hover {
@@ -92,7 +95,7 @@ export default {
     text-align: center;
 }
 
-.SearchBar-submit a {
+.SearchBar-submit button {
     border-radius: 4px;
     padding: .72rem 1.7rem;
     background-color: #cca353;
@@ -101,7 +104,7 @@ export default {
     transition: background-color .5s;
 }
 
-.SearchBar-submit a:hover {
+.SearchBar-submit button:hover {
     cursor: pointer;
     background-color: #a7874b;
 }
