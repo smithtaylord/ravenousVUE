@@ -3,9 +3,13 @@
         <div class="SearchBar">
             <div class="SearchBar-sort-options">
                 <ul class="d-flex justify-content-center">
-                    <li class="px-5">Best Match</li>
-                    <li class="px-5">Highest Rated</li>
-                    <li class="px-5">Most Reviewed</li>
+                    <li @click="sort('best_match')" :class="sortBy == 'best_match' ?
+                        'px-5 active' : 'px-5'">Best Match</li>
+                    <li @click="sort('rating')" :class="sortBy == 'rating' ?
+                        'px-5 active' : 'px-5'">Highest Rated</li>
+                    <li @click="sort('review_count')" :class="sortBy == 'review_count' ?
+                        'px-5 active' : 'px-5'">Most Reviewed</li>
+
                 </ul>
             </div>
             <div class="SearchBar-fields">
@@ -22,9 +26,17 @@
 
 
 <script>
+import { ref } from 'vue';
+
 export default {
     setup() {
-        return {}
+        const sortBy = ref('best_match')
+        return {
+            sortBy,
+            sort(category) {
+                sortBy.value = category
+            }
+        }
     }
 }
 </script>
